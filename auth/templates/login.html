@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}
+Log In
+{% endblock %}
+
+{% block content %}
+    {% include "form.html" with form=login_form action="login" legend="Log In Here" submit="Log In" %}
+{% endblock %}
+

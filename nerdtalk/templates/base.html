@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>
+            Nerdtalk - 
+            {% block title %}
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css" />
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+        <!--<![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        {% load menu %}
+        {% generate_menu %}
+        <style>
+            .setheight { height: 35px; overflow: none; }
+        </style>
+        <div class='pure-g setheight'>
+            <div class='pure-u-1'>
+                <div class="pure-menu pure-menu-horizontal">
+                    {% for item in menus.main %}
+                        <a href="{{item.url}}" class="pure-menu-heading pure-menu-link {% if item.selected %}pure-menu-selected {% endif %}">{{item.title}}</a> <!-- pure-menu-selected doesn't work here :( -->
+                        {% if item.children %}
+                            <ul class='pure-menu-list'>
+                                {% for sub in item.children %}
+                                    <li class="pure-menu-item {% if sub.selected %}pure-menu-selected {% endif %}">
+                                        <a href="{{sub.url}}" class="pure-menu-link">{{sub.title}}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
